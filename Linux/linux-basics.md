@@ -249,3 +249,50 @@ uid=1001(user01) gid=1001(user01) groups=1001(user01),1002(group01)
 /etc/group
 group01:x:1002:user01
 ```
+
+# ファイルの種類と属性
+## ファイルの状態
+```bash
+- ファイルの種類
+所有ユーザのパーミッション
+所有グループのパーミッション
+第3社のパーミッション
+-rwxrwxrwx
+```
+
+- ファイルの種類
+  - 通常dファイル -
+  - ディレクトリ d
+  - リンクファイル l
+  - 特殊ファイル bまたはc
+
+- パーミッションとは？
+  - ファイルやディレクトリに対するユーザのアクセス権
+  - 読込(r)、書込(w)、実行(x)の権限の有無を設定。
+
+- 第３者とは？
+  - 所有ユーザでもなく、グループにも所属してない者。
+
+- fileコマンド
+  - 拡張子がないファイルが多いため、fileで調べる。
+```bash
+file sample.txt
+```
+
+-  所有者の変更(chown)
+
+```bash
+# グループの所有を変更
+ll
+-rw-r--r--. 1 user01 user01 4 11月  4 23:08 sample.txt
+chown :group01 sample.txt
+
+ll
+-rw-r--r--. 1 user01 group01 4 11月  4 23:08 sample.txt
+# ファイルの所有者を変更
+chown student sample.txt
+ll
+-rw-r--r--. 1 student group01 4 11月  4 23:08 sample.txt
+# 同時変更
+chown student:group01 sample.txt
+```
